@@ -9,6 +9,7 @@ import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
   overflow-x: hidden;
@@ -199,8 +200,8 @@ const Cart = () => {
   const checkoutHandler = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/payments/create-checkout-session`,
+      const res = await publicRequest.post(
+        `/payments/create-checkout-session`,
         {
           items: cart.products,
           discount,
@@ -209,6 +210,7 @@ const Cart = () => {
       setLoading(false);
       window.location.href = res.data.url;
     } catch (error) {
+      console.log(error);
       navigate("/payment/cancel");
     }
   };
@@ -239,7 +241,12 @@ const Cart = () => {
             <TopText>Shoping Bag ({cart.quantity})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButtonB>CHECKOUT NOW</TopButtonB>
+          <TopButtonB
+            onClick={checkoutHandler}
+            disabled={cart.length < 0 || loading}
+          >
+            CHECKOUT NOW
+          </TopButtonB>
         </Top>
         <Bottom>
           <BLeft>
