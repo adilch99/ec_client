@@ -49,7 +49,7 @@ const CategoryItem = ({ item }) => {
       <Image src={item.img} />
       <ImageInfo>
         <Title>{item.title}</Title>
-        <Link to={`/products/shirt`}>
+        <Link to={`/products/${item.cat}`}>
           <Button>SHOP NOW</Button>
         </Link>
       </ImageInfo>

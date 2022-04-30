@@ -10,6 +10,7 @@ import Cancle from "./pages/cancel";
 import { useSelector, useDispatch } from "react-redux";
 import { loginSuccess } from "./redux/userRedux";
 import { useEffect } from "react";
+import Subscribed from "./pages/subscribed";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -31,6 +32,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/payment/success" element={<Success />} />
       <Route path="/payment/cancel" element={<Cancle />} />
+      <Route path="/payment/subscribe" element={<Subscribed />} />
     </Routes>
   );
 }

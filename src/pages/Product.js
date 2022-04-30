@@ -11,6 +11,7 @@ import { publicRequest } from "../requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
 import { loginSuccess } from "../redux/userRedux";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -199,6 +200,8 @@ const Product = () => {
   const [review, setReview] = useState("");
   const [loading, setLoading] = useState(false);
   const [allReviews, setAllReviews] = useState([]);
+  const navigate = useNavigate();
+  const [bloading, setBloading] = useState(false);
 
   const { error, errorMsg, user, isFetching } = useSelector(
     (state) => state.user
@@ -259,6 +262,21 @@ const Product = () => {
     }
   };
 
+  const subscriptionHandler = async () => {
+    setBloading(true);
+    try {
+      const res = await publicRequest.post(`/payments/create-subscription`, {
+        items: [{ ...product }],
+        quantity: quantity,
+      });
+      setBloading(false);
+      window.location.href = res.data.url;
+    } catch (error) {
+      console.log(error);
+      navigate("/payment/cancel");
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -312,6 +330,9 @@ const Product = () => {
                   />
                 </ProductNumContainer>
                 <Button onClick={handleClick}>ADD TO CART</Button>
+                <Button onClick={subscriptionHandler} disabled={bloading}>
+                  Get Yearly Subscription
+                </Button>
               </FilterBottom>
             </FilterContainer>
           </ImgInfo>

@@ -64,6 +64,9 @@ const Center = styled.div`
 const Title = styled.span`
   font-size: 30px;
   font-weight: bold;
+  @media only screen and (max-width: 550px) {
+    display: none;
+  }
 `;
 
 const Right = styled.div`
@@ -78,11 +81,17 @@ const Right = styled.div`
     color: black;
     text-decoration: none;
   }
+  @media only screen and (max-width: 550px) {
+    width: 100%;
+  }
 `;
 
 const AuthMenu = styled.span`
   margin-right: 15px;
   font-weight: 400;
+  @media only screen and (max-width: 550px) {
+    width: 100%;
+  }
 `;
 
 // navbar
@@ -111,7 +120,7 @@ const Navbar = () => {
           </Left>
           <Center>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <Title>Orange.</Title>
+              <Title>aLL iN one.</Title>
             </Link>
           </Center>
           <Right>

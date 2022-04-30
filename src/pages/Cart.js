@@ -188,14 +188,19 @@ const FinalButton = styled.button`
   }
 `;
 
+const ErrorText = styled.p`
+  text-align: center;
+  color: red;
+  margin: 10px auto;
+`;
+
 const Cart = () => {
   const user = useSelector((state) => state.user.user);
 
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
-  const [discount, setDiscount] = useState(0);
-  const [wantDiscount, setWantDiscount] = useState(false);
+  const [discountError, setDiscountError] = useState(false);
   const [loading, setLoading] = useState(false);
   const checkoutHandler = async () => {
     setLoading(true);
@@ -204,7 +209,6 @@ const Cart = () => {
         `/payments/create-checkout-session`,
         {
           items: cart.products,
-          discount,
         }
       );
       setLoading(false);
@@ -216,18 +220,15 @@ const Cart = () => {
   };
 
   const pointsHandler = () => {
-    setWantDiscount(!wantDiscount);
-  };
-
-  useEffect(() => {
-    if (wantDiscount && cart.total < user.giftPoints) {
-      setDiscount(cart.total);
-    } else if (wantDiscount) {
-      setDiscount(user.giftPoints);
-    } else {
-      setDiscount(0);
+    if (user.giftPoints <= cart.total) {
+      setDiscountError(true);
+      setTimeout(() => {
+        setDiscountError(false);
+      }, 3000);
+      return;
     }
-  }, [wantDiscount]);
+    navigate("/payment/success");
+  };
 
   return (
     <Container>
@@ -308,8 +309,7 @@ const Cart = () => {
                 <b>Total</b>
               </SummaryInfo>
               <SummaryInfo>
-                <b>$ {cart.total - discount}</b>
-                <b>{wantDiscount && `,  saved ${discount}`}</b>
+                <b>$ {cart.total}</b>
               </SummaryInfo>
             </OSummary>
             <FinalButton
@@ -319,8 +319,9 @@ const Cart = () => {
               CHECKOUT NOW
             </FinalButton>
             <FinalButton onClick={pointsHandler} disabled={cart.length > 0}>
-              {wantDiscount ? "Dont Buy With Points" : "Buy With GiftPoints"}
+              Buy With GiftPoints
             </FinalButton>
+            <ErrorText>{discountError && "Not enough GiftPoints"}</ErrorText>
           </BRight>
         </Bottom>
       </Wrapper>

@@ -2,20 +2,20 @@ export const categories = [
   {
     id: 1,
     img: "https://media.istockphoto.com/photos/african-american-woman-in-jacket-with-hands-in-pockets-looking-at-picture-id1207472153?k=20&m=1207472153&s=612x612&w=0&h=aYoMBd2aQoowzUGpLqEKQIS1AnI6I6Mx1qXWGs8smXM=",
-    title: "SHIRT STYLE!",
+    title: "Get Dressed",
     cat: "shirt",
   },
   {
     id: 2,
-    img: "https://img.joomcdn.net/5592aeb795b1aa2f65bca5f007d3b8ccde3ba0a1_original.jpeg",
-    title: "CASUAL",
-    cat: "coats",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYDM0VEE1KhUn_Audxjp_u7LtwowpfRHw1Lfm9qK6wzNbEZeEZmLyA7XGYb21xzV2nYe0&usqp=CAU",
+    title: "Animals Food",
+    cat: "animalfood",
   },
   {
     id: 3,
-    img: "https://ae01.alicdn.com/kf/HTB1RWY2XoLrK1Rjy1zbq6AenFXa5/Mom-jeans-embroidered-denim-pants-trousers-boyfriend-jeans-for-women-Japanese-style-ladies-jeans-female-2018.jpg_Q90.jpg_.webp",
-    title: "LIGHT JEANS",
-    cat: "jeans",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF_U8qSDPw6U-Y6emNRJuHoEw2IFSg0UqDJUTengdm2wlyalYMJEbu-25MLBjXqkHKRi4&usqp=CAU",
+    title: "Cosmetics",
+    cat: "cosmetics",
   },
 ];
 
